@@ -12,6 +12,10 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import HomeScreen from '../screens/HomeScreen';
+import QuizScreen from '../screens/QuizScreen';
+import ResultsScreen from '../screens/ResultsScreen';
+
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -37,15 +41,32 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName='Root'>
+      <Stack.Screen name="Root" component={HomeStackNavigator} options={{ headerShown: false }} />
+
+      {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} /> */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+      </Stack.Group> */}
     </Stack.Navigator>
   );
 }
+
+/**
+ * A stack navigator for homescreen, quizscreen and resultscreen
+ */
+
+function HomeStackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Quiz" component={QuizScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Result" component={ResultsScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
+
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
